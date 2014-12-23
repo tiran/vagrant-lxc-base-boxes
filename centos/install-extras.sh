@@ -9,6 +9,9 @@ info 'Installing extra packages and upgrading'
 debug 'Bringing container up'
 utils.lxc.start
 
+# how to get that network up?...
+utils.lxc.attach ifup eth0
+
 # Sleep for a bit so that the container can get an IP
 SECS=20
 log "Sleeping for $SECS seconds..."

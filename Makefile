@@ -1,6 +1,6 @@
 UBUNTU_BOXES= precise quantal raring saucy trusty utopic
 DEBIAN_BOXES= squeeze wheezy sid jessie
-CENTOS_BOXES= 6
+CENTOS_BOXES= 6 7
 FEDORA_BOXES= 21 20 19
 TODAY=$(shell date -u +"%Y-%m-%d")
 
