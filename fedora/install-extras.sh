@@ -19,3 +19,11 @@ PACKAGES=(vim curl wget man-db bash-completion ca-certificates sudo openssh-serv
 
 utils.lxc.attach yum update -y
 utils.lxc.attach yum install ${PACKAGES[*]} -y
+
+
+MASK_TMP=${MASK_TMP:-0}
+
+if [ $MASK_TMP -eq 1 ]; then
+	# don't overmount /tmp with tmpfs: important for lxc-cachier
+	utils.lxc.attach systemctl mask tmp.mount
+fi
