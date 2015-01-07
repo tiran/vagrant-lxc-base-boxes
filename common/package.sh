@@ -23,7 +23,11 @@ popd &>>${LOG}
 
 # Prepare package contents
 log 'Preparing box package contents'
-cp conf/${DISTRIBUTION} ${WORKING_DIR}/lxc-config
+if [ -f conf/${DISTRIBUTION}-${RELEASE} ]; then
+  cp conf/${DISTRIBUTION}-${RELEASE} ${WORKING_DIR}/lxc-config
+else
+  cp conf/${DISTRIBUTION} ${WORKING_DIR}/lxc-config
+fi
 cp conf/metadata.json ${WORKING_DIR}
 sed -i "s/<TODAY>/${NOW}/" ${WORKING_DIR}/metadata.json
 
