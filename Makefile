@@ -1,7 +1,7 @@
 UBUNTU_BOXES= precise quantal raring saucy trusty utopic
 DEBIAN_BOXES= squeeze wheezy sid jessie
 CENTOS_BOXES= 6
-FEDORA_BOXES= 21 20 19
+FEDORA_BOXES= 23 22
 TODAY=$(shell date -u +"%Y-%m-%d")
 
 # Replace i686 with i386 and x86_64 with amd64
@@ -24,6 +24,7 @@ $(UBUNTU_BOXES):
 	@sudo -E ./mk-debian.sh ubuntu $(@) $(ARCH) $(CONTAINER) $(PACKAGE)
 	@sudo chmod +rw $(PACKAGE)
 	@sudo chown ${USER}: $(PACKAGE)
+	@sudo chown ${USER}: log log/*
 $(DEBIAN_BOXES): CONTAINER = "vagrant-base-${@}-$(ARCH)"
 $(DEBIAN_BOXES): PACKAGE = "output/${TODAY}/vagrant-lxc-${@}-$(ARCH).box"
 $(DEBIAN_BOXES):
@@ -31,6 +32,7 @@ $(DEBIAN_BOXES):
 	@sudo -E ./mk-debian.sh debian $(@) $(ARCH) $(CONTAINER) $(PACKAGE)
 	@sudo chmod +rw $(PACKAGE)
 	@sudo chown ${USER}: $(PACKAGE)
+	@sudo chown ${USER}: log log/*
 $(CENTOS_BOXES): CONTAINER = "vagrant-base-centos-${@}-$(ARCH)"
 $(CENTOS_BOXES): PACKAGE = "output/${TODAY}/vagrant-lxc-centos-${@}-$(ARCH).box"
 $(CENTOS_BOXES):
@@ -38,6 +40,7 @@ $(CENTOS_BOXES):
 	@sudo -E ./mk-centos.sh $(@) $(ARCH) $(CONTAINER) $(PACKAGE)
 	@sudo chmod +rw $(PACKAGE)
 	@sudo chown ${USER}: $(PACKAGE)
+	@sudo chown ${USER}: log log/*
 $(FEDORA_BOXES): CONTAINER = "vagrant-base-fedora-${@}-$(ARCH)"
 $(FEDORA_BOXES): PACKAGE = "output/${TODAY}/vagrant-lxc-fedora-${@}-$(ARCH).box"
 $(FEDORA_BOXES):
@@ -45,6 +48,7 @@ $(FEDORA_BOXES):
 	@sudo -E ./mk-fedora.sh $(@) $(ARCH) $(CONTAINER) $(PACKAGE)
 	@sudo chmod +rw $(PACKAGE)
 	@sudo chown ${USER}: $(PACKAGE)
+	@sudo chown ${USER}: log log/*
 
 acceptance: CONTAINER = "vagrant-base-acceptance-$(ARCH)"
 acceptance: PACKAGE = "output/${TODAY}/vagrant-lxc-acceptance-$(ARCH).box"
@@ -67,3 +71,4 @@ clean:
 			vagrant-base-$${r}-$(ARCH) \
 			output/${TODAY}/vagrant-lxc-$${r}-$(ARCH).box; \
 	done
+	@sudo chown ${USER}: log log/*

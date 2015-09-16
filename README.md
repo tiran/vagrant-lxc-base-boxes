@@ -18,9 +18,9 @@ This repository contains a set of scripts for creating base boxes for usage with
   - Jessie x86_64
   - Sid x86_64
 * Fedora
-  - 19 x86_64
-  - 20 x86_64
   - 21 x86_64
+  - 22 x86_64
+  - 23 x86_64
 * CentOS
   - 6 x86_64
 
